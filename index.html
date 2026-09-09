@@ -5,77 +5,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accolades Tours - Une nouvelle expérience de voyage</title>
     <style>
+        :root {
+            --primary-blue: #0d3982;
+            --primary-green: #68b620;
+            --dark-blue: #082352;
+            --light-bg: #f4f7f6;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
+            background-color: var(--light-bg);
             color: #333;
+        }
+
+        /* Header / Meni Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary-green);
+            font-style: italic;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Hero Banner ak Bwat Rechèch */
+        .hero {
+            background: linear-gradient(rgba(13, 57, 130, 0.6), rgba(8, 35, 82, 0.7)), 
+                        url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200') center/cover no-repeat;
+            padding: 60px 20px 80px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #e0f2fe;
+            margin-bottom: 30px;
+        }
+
+        /* Bwat Rechèch Vwayaj */
+        .search-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 900px;
+            margin: -50px auto 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-top: 5px solid var(--primary-green);
+            color: #333;
+        }
+
+        .trip-type {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .btn-search {
+            grid-column: 1 / -1;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .btn-search:hover {
+            background-color: #539418;
+        }
+
+        /* Section Sèvis Yo */
+        .features {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
             text-align: center;
         }
-        header {
-            background-color: #0d233a;
-            color: white;
-            padding: 40px 20px;
+
+        .features h2 {
+            color: var(--primary-blue);
+            font-size: 2em;
+            margin-bottom: 40px;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
-        p.slogan {
-            font-style: italic;
-            font-size: 1.2em;
-            color: #ffb400;
-        }
-        .container {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .card {
+
+        .feature-card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--primary-blue);
         }
-        .email-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #0d233a;
-            color: #ffb400;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+
+        .feature-card h3 {
+            color: var(--primary-blue);
+            margin-top: 15px;
         }
+
+        /* Footer */
         footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #0d233a;
+            background-color: var(--dark-blue);
             color: white;
-            font-size: 0.9em;
+            padding: 40px 20px 20px 20px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 5px 0;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header / Navbar -->
     <header>
-        <h1>Accolades Tours</h1>
-        <p class="slogan">Une nouvelle expérience de voyage. Bientôt disponible en 2027</p>
+        <div class="navbar">
+            <div class="logo-text">ACCOLADES <span>TOURS</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Trajets</a></li>
+                <li><a href="#">Services VIP</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <h2>Bienvenue chez Accolades Tours</h2>
-            <p>Nous préparons un service de transport exceptionnel à Gonaïves et à travers Haïti pour vous offrir confort, sécurité et élégance.</p>
-            <p>Notre site officiel est actuellement en construction. Restez connectés pour découvrir nos trajets, nos bus modernes et nos services VIP.</p>
-            
-            <a href="mailto:contact@accoladestours.com" class="email-btn">Nous contacter par Email</a>
+    <!-- Hero Banner -->
+    <div class="hero">
+        <h1>Une Nouvelle Expérience de Voyage</h1>
+        <p>Confort, Sécurité et Élégance à travers Haïti — Bientôt disponible en 2027</p>
+    </div>
+
+    <!-- Bwat Rechèch Billet -->
+    <div class="search-card">
+        <div class="trip-type">
+            <label><input type="radio" name="trip" checked> Aller simple</label>
+            <label><input type="radio" name="trip"> Aller-retour</label>
+        </div>
+        <form class="search-grid" onsubmit="event.preventDefault(); alert('Le système de réservation en ligne sera officiellement disponible en 2027 !');">
+            <div class="input-group">
+                <label>Départ</label>
+                <select>
+                    <option>Gonaïves</option>
+                    <option>Port-au-Prince</option>
+                    <option>Cap-Haïtien</option>
+                    <option>Saint-Marc</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Destination</label>
+                <select>
+                    <option>Port-au-Prince</option>
+                    <option>Gonaïves</option>
+                    <option>Cap-Haïtien</option>
+                    <option>Saint-Marc</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Date de départ</label>
+                <input type="date">
+            </div>
+            <div class="input-group">
+                <label>Passagers</label>
+                <input type="number" value="1" min="1" max="10">
+            </div>
+            <button type="submit" class="btn-search">Rechercher un trajet</button>
+        </form>
+    </div>
+
+    <!-- Avantages Accolades Tours -->
+    <div class="features">
+        <h2>Pourquoi voyager avec Accolades Tours ?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🚌 Bus Modernes</h3>
+                <p>Des véhicules ultra-modernes équipés de sièges inclinables et de la climatisation intégrale.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Sécurité Maximale</h3>
+                <p>Des chauffeurs professionnels expérimentés et un suivi des trajets en temps réel.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📶 Wifi & Confort</h3>
+                <p>Profitez du Wi-Fi à bord, de prises de recharge et de rafraîchissements durant votre vwayaj.</p>
+            </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2027 Accolades Tours. Tous droits réservés.</p>
+        <p>Contact : <a href="mailto:contact@accoladestours.com">contact@accoladestours.com</a> | Gonaïves, Haïti</p>
     </footer>
 
 </body>
