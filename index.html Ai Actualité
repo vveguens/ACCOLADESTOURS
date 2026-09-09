@@ -1,0 +1,9 @@
+<!-- Bwat Aktyalite / Nouvèl -->
+<div style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+    <div style="background: white; border-radius: 8px; border-left: 5px solid #68b620; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        <h3 style="color: #0d3982; margin-top: 0;">📰 Actualités & Infos Trafic Haïti</h3>
+        <p style="font-size: 14px; color: #555;">
+            <strong>Flash Info :</strong> Nos services de transport fonctionnent normalement. Suivez ici les mises à jour en direct sur l'état des routes et le trafic national.
+        </p>
+    </div>
+</div>
