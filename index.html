@@ -57,15 +57,18 @@
             justify-content: center;
         }
 
-        /* Logo Imaj Accolades Tours */
+        /* Logo Imaj Accolades Tours (Pi Gwo e Pi Long) */
         .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex: 1;
+            padding: 0 10px;
         }
 
         .logo-img {
-            height: 45px;
+            height: 70px;
+            max-width: 220px;
             width: auto;
             object-fit: contain;
         }
@@ -76,27 +79,21 @@
             gap: 10px;
         }
 
-        /* Widget Météo Header à droite */
+        /* Widget Météo Header à droite (Non-Cliquable) */
         .weather-widget {
             display: flex;
             align-items: center;
             gap: 6px;
             background: #f0f9ff;
             border: 1px solid #bae6fd;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
-            text-decoration: none;
             color: var(--primary-blue);
-            transition: all 0.2s ease;
-        }
-
-        .weather-widget:hover {
-            background: #e0f2fe;
-            transform: translateY(-1px);
+            cursor: default;
         }
 
         .weather-icon {
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .weather-info {
@@ -107,7 +104,7 @@
         }
 
         .weather-temp {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--primary-blue);
         }
@@ -338,19 +335,6 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        .meteo-link {
-            display: inline-block;
-            margin-top: 6px;
-            font-size: 11px;
-            color: #0284c7;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .meteo-link:hover {
-            text-decoration: underline;
-        }
-
         /* Chatbot Modal */
         .chat-modal {
             position: fixed;
@@ -468,20 +452,20 @@
         <div class="navbar">
             <button class="menu-btn" onclick="alert('Menu Accolades Tours : Accueil, Trajets, VIP Services, Contact')">☰</button>
             
-            <!-- Logo Accolades Tours -->
+            <!-- Logo Accolades Tours (Agrandit & Allongé) -->
             <div class="logo-container">
                 <img src="Accolades Tours logo.PNG" alt="Accolades Tours Logo" class="logo-img">
             </div>
             
             <div class="header-right">
-                <!-- Widget Météo en haut à droite -->
-                <a href="https://meteo-haiti.gouv.ht" target="_blank" class="weather-widget" title="Consulter la météo officielle d'Haïti">
+                <!-- Widget Météo Non-Cliquable -->
+                <div class="weather-widget">
                     <span class="weather-icon">🌤️</span>
                     <div class="weather-info">
-                        <span class="weather-temp">75°F</span>
+                        <span class="weather-temp" id="headerTemp">--°F</span>
                         <span class="weather-location">Gonaïves, HT</span>
                     </div>
-                </a>
+                </div>
 
                 <button class="user-btn" onclick="toggleChat()" title="Assistant AI & Compte">👤</button>
             </div>
@@ -585,7 +569,7 @@
         </div>
     </div>
 
-    <!-- Bwat Aktyalite Flash Info ak Meteo Express AI -->
+    <!-- Bwat Aktyalite Flash Info ak Meteo Accolades Tours -->
     <div class="news-section">
         <div class="news-card">
             <div class="news-title">📰 FLASH INFO ACCOLADES TOURS</div>
@@ -593,9 +577,8 @@
         </div>
 
         <div class="news-card weather-news">
-            <div class="news-title" style="color: #0284c7;">🌤️ MÉTÉO EXPRESS AI (RÉSUMÉ)</div>
-            <div class="news-text" id="weatherNewsText">Solèy cho sou Gonaïves (75°F) : Bèl kondisyon pou vwayaje san traka jodi a.</div>
-            <a href="https://meteo-haiti.gouv.ht" target="_blank" class="meteo-link">🔗 Wè rapò meteo konplè sou meteo-haiti.gouv.ht →</a>
+            <div class="news-title" style="color: #0284c7;">🌤️ MÉTÉO ACCOLADES TOURS</div>
+            <div class="news-text" id="weatherNewsText">Chargement des données météo en direct...</div>
         </div>
     </div>
 
@@ -626,6 +609,33 @@
 
     <!-- JavaScript -->
     <script>
+        /* Fetch Meteo Otomatik an dirèk pou Gonaïves (API Gratuite) */
+        async function fetchLiveWeather() {
+            try {
+                // Coordonnées Gonaïves : 19.45, -72.68
+                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=19.45&longitude=-72.68&current_weather=true&temperature_unit=fahrenheit');
+                const data = await response.json();
+                if (data && data.current_weather) {
+                    const temp = Math.round(data.current_weather.temperature);
+                    document.getElementById('headerTemp').innerText = temp + '°F';
+                    
+                    // Mizajou bwat tèks meteo anba a
+                    const weatherText = `Solèy ak bon tan sou Gonaïves (${temp}°F) : Bèl kondisyon pou vwayaje san traka jodi a.`;
+                    document.getElementById('weatherNewsText').innerText = weatherText;
+                } else {
+                    document.getElementById('headerTemp').innerText = '75°F';
+                    document.getElementById('weatherNewsText').innerText = 'Solèy ak bon tan sou Gonaïves (75°F) : Bèl kondisyon pou vwayaje san traka jodi a.';
+                }
+            } catch (error) {
+                console.log('Erreur météo:', error);
+                document.getElementById('headerTemp').innerText = '75°F';
+                document.getElementById('weatherNewsText').innerText = 'Solèy ak bon tan sou Gonaïves (75°F) : Bèl kondisyon pou vwayaje san traka jodi a.';
+            }
+        }
+
+        // Rele meteo an dirèk lè paj la chaje
+        fetchLiveWeather();
+
         /* Flash Info Aktyalite */
         const newsItems = [
             "Lancement officiel de nos lignes de transport prévu pour 2027.",
@@ -645,25 +655,6 @@
                 newsEl.style.opacity = 1;
             }, 500);
         }, 8000);
-
-        /* Meteo Express AI Aktyalite */
-        const weatherNewsItems = [
-            "Gonaïves (75°F) : Solèy klere ak bèl tan pou vwayaje sou Nasyonal #1 la.",
-            "Cap-Haïtien (78°F) : Ti van fre nan nò a, wout yo swa e lib pou vwayajè yo.",
-            "Port-au-Prince (80°F) : Bèl tan jeneral, AI nou an konsèye w bwè anpil dlo nan rès jounen an.",
-            "Météo Haïti Update: Pas de perturbations majeures signalées sur nos itinéraires principaux."
-        ];
-
-        let weatherIndex = 0;
-        setInterval(() => {
-            weatherIndex = (weatherIndex + 1) % weatherNewsItems.length;
-            const weatherEl = document.getElementById("weatherNewsText");
-            weatherEl.style.opacity = 0;
-            setTimeout(() => {
-                weatherEl.innerText = weatherNewsItems[weatherIndex];
-                weatherEl.style.opacity = 1;
-            }, 500);
-        }, 9000);
 
         function toggleChat() {
             var modal = document.getElementById('chatModal');
