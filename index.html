@@ -71,10 +71,10 @@
             font-style: italic;
         }
 
-        /* Hero Banner */
+        /* Hero Banner ak foto bus.PNG pa w la */
         .hero {
             background: linear-gradient(rgba(13, 57, 130, 0.75), rgba(8, 35, 82, 0.85)), 
-                        url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200') center/cover no-repeat;
+                        url('bus.PNG') center/cover no-repeat;
             padding: 40px 15px 60px 15px;
             text-align: center;
             color: white;
@@ -101,6 +101,7 @@
             margin: -35px auto 30px auto;
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             border-top: 4px solid var(--primary-green);
+            box-sizing: border-box;
         }
 
         .trip-type {
@@ -117,12 +118,14 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            width: 100%;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
             text-align: left;
+            width: 100%;
         }
 
         .input-group label {
@@ -139,6 +142,8 @@
             border-radius: 6px;
             font-size: 14px;
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
             background-color: #fff;
         }
 
@@ -193,7 +198,7 @@
 
         .carousel-card img {
             width: 100%;
-            height: 160px;
+            height: 180px;
             object-fit: cover;
         }
 
@@ -278,7 +283,7 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        /* Chatbot Modal (Devan Ekran an) */
+        /* Chatbot Modal */
         .chat-modal {
             position: fixed;
             top: 0;
@@ -424,9 +429,9 @@
             <div class="input-group">
                 <label>Destination</label>
                 <select>
-                    <option>Cap-Haïtien</option>
-                    <option>Gonaïves</option>
                     <option>Port-au-Prince</option>
+                    <option>Gonaïves</option>
+                    <option>Cap-Haïtien</option>
                     <option>Saint-Marc</option>
                 </select>
             </div>
@@ -442,26 +447,26 @@
         </form>
     </div>
 
-    <!-- Carousel Destinasyon -->
+    <!-- Carousel Destinasyon ak Foto pa w yo -->
     <div class="destinations-section">
         <h2 class="section-title">Nos Destinations</h2>
         <div class="carousel-container">
             <div class="carousel-card">
-                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=600" alt="Gonaïves">
+                <img src="Gonaives.JPG" alt="Gonaïves">
                 <div class="carousel-info">
                     <h3>Gonaïves</h3>
                     <p>La cité de l'Indépendance — Trajets VIP quotidiens dès 2027.</p>
                 </div>
             </div>
             <div class="carousel-card">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" alt="Cap-Haïtien">
+                <img src="Cap-haitien.JPG" alt="Cap-Haïtien">
                 <div class="carousel-info">
                     <h3>Cap-Haïtien</h3>
                     <p>Voyagez vers le Nord dans un confort absolu et sécurisé.</p>
                 </div>
             </div>
             <div class="carousel-card">
-                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600" alt="Port-au-Prince">
+                <img src="Port-au-prince.JPG" alt="Port-au-Prince">
                 <div class="carousel-info">
                     <h3>Port-au-Prince</h3>
                     <p>Connexions directes et rapides avec toutes les régions.</p>
@@ -492,12 +497,12 @@
     <!-- Bwat Aktyalite Dinamik -->
     <div class="news-section">
         <div class="news-card">
-            <div class="news-title">📰 FLASH INFO ACCLADES TOURS</div>
+            <div class="news-title">📰 FLASH INFO ACCOLADES TOURS</div>
             <div class="news-text" id="newsText">Lancement officiel de nos lignes de transport prévu pour 2027.</div>
         </div>
     </div>
 
-    <!-- Chatbot AI Modal (Chak fwa yo klike sou icon Kont 👤) -->
+    <!-- Chatbot AI Modal -->
     <div class="chat-modal" id="chatModal">
         <div class="chat-box">
             <div class="chat-header">
@@ -522,9 +527,8 @@
         <p>Contact : <a href="mailto:contact@accoladestours.com">contact@accoladestours.com</a></p>
     </footer>
 
-    <!-- JavaScript pou Chatbot ak Aktyalite Dinamik -->
+    <!-- JavaScript -->
     <script>
-        // Aktyalite k ap chanje chak 10 sekond
         const newsItems = [
             "Lancement officiel de nos lignes de transport prévu pour 2027.",
             "Trajets VIP directs : Gonaïves - Port-au-Prince - Cap-Haïtien.",
@@ -543,7 +547,6 @@
             }, 500);
         }, 10000);
 
-        // Chatbot Modal Toggle
         function toggleChat() {
             var modal = document.getElementById('chatModal');
             if (modal.style.display === 'flex') {
@@ -553,7 +556,6 @@
             }
         }
 
-        // Repons Chatbot AI
         function sendMsg() {
             var input = document.getElementById('chatInput');
             var body = document.getElementById('chatBody');
