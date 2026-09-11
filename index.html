@@ -40,7 +40,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
+            padding: 8px 15px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -57,21 +57,68 @@
             justify-content: center;
         }
 
-        .logo-text {
-            font-size: 18px;
+        /* Logo Imaj Accolades Tours */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Widget Météo Header à droite */
+        .weather-widget {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: all 0.2s ease;
+        }
+
+        .weather-widget:hover {
+            background: #e0f2fe;
+            transform: translateY(-1px);
+        }
+
+        .weather-icon {
+            font-size: 16px;
+        }
+
+        .weather-info {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+            line-height: 1.1;
+        }
+
+        .weather-temp {
+            font-size: 13px;
             font-weight: 800;
             color: var(--primary-blue);
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            text-align: center;
         }
 
-        .logo-text span {
-            color: var(--primary-green);
-            font-style: italic;
+        .weather-location {
+            font-size: 10px;
+            color: #64748b;
+            font-weight: 600;
         }
 
-        /* Hero Banner ak foto bus.PNG pa w la */
+        /* Hero Banner */
         .hero {
             background: linear-gradient(rgba(13, 57, 130, 0.75), rgba(8, 35, 82, 0.85)), 
                         url('bus.PNG') center/cover no-repeat;
@@ -256,6 +303,9 @@
             width: 92%;
             max-width: 1000px;
             margin: 25px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .news-card {
@@ -265,6 +315,11 @@
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             min-height: 80px;
+        }
+
+        .news-card.weather-news {
+            border-left: 4px solid #0284c7;
+            background: #f0f9ff;
         }
 
         .news-title {
@@ -281,6 +336,19 @@
             font-size: 13px;
             color: #334155;
             transition: opacity 0.5s ease-in-out;
+        }
+
+        .meteo-link {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 11px;
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .meteo-link:hover {
+            text-decoration: underline;
         }
 
         /* Chatbot Modal */
@@ -399,8 +467,24 @@
     <header>
         <div class="navbar">
             <button class="menu-btn" onclick="alert('Menu Accolades Tours : Accueil, Trajets, VIP Services, Contact')">☰</button>
-            <div class="logo-text">ACCOLADES <span>TOURS</span></div>
-            <button class="user-btn" onclick="toggleChat()" title="Assistant AI & Compte">👤</button>
+            
+            <!-- Logo Accolades Tours -->
+            <div class="logo-container">
+                <img src="Accolades Tours logo.PNG" alt="Accolades Tours Logo" class="logo-img">
+            </div>
+            
+            <div class="header-right">
+                <!-- Widget Météo en haut à droite -->
+                <a href="https://meteo-haiti.gouv.ht" target="_blank" class="weather-widget" title="Consulter la météo officielle d'Haïti">
+                    <span class="weather-icon">🌤️</span>
+                    <div class="weather-info">
+                        <span class="weather-temp">75°F</span>
+                        <span class="weather-location">Gonaïves, HT</span>
+                    </div>
+                </a>
+
+                <button class="user-btn" onclick="toggleChat()" title="Assistant AI & Compte">👤</button>
+            </div>
         </div>
     </header>
 
@@ -447,7 +531,7 @@
         </form>
     </div>
 
-    <!-- Carousel Destinasyon ak Foto pa w yo -->
+    <!-- Carousel Destinasyon -->
     <div class="destinations-section">
         <h2 class="section-title">Nos Destinations</h2>
         <div class="carousel-container">
@@ -473,10 +557,10 @@
                 </div>
             </div>
             <div class="carousel-card">
-                <img src="bus.PNG" alt="Port-au-Prince">
+                <img src="bus.PNG" alt="Service VIP">
                 <div class="carousel-info">
-                    <h3> + </h3>
-                    <p>Connexions directes et rapides avec toutes les régions.</p>
+                    <h3>Saint-Marc & Autres</h3>
+                    <p>Réseau étendu desservant les villes clés d'Haïti.</p>
                 </div>
             </div>        
         </div>
@@ -501,11 +585,17 @@
         </div>
     </div>
 
-    <!-- Bwat Aktyalite Dinamik -->
+    <!-- Bwat Aktyalite Flash Info ak Meteo Express AI -->
     <div class="news-section">
         <div class="news-card">
             <div class="news-title">📰 FLASH INFO ACCOLADES TOURS</div>
             <div class="news-text" id="newsText">Lancement officiel de nos lignes de transport prévu pour 2027.</div>
+        </div>
+
+        <div class="news-card weather-news">
+            <div class="news-title" style="color: #0284c7;">🌤️ MÉTÉO EXPRESS AI (RÉSUMÉ)</div>
+            <div class="news-text" id="weatherNewsText">Solèy cho sou Gonaïves (75°F) : Bèl kondisyon pou vwayaje san traka jodi a.</div>
+            <a href="https://meteo-haiti.gouv.ht" target="_blank" class="meteo-link">🔗 Wè rapò meteo konplè sou meteo-haiti.gouv.ht →</a>
         </div>
     </div>
 
@@ -536,10 +626,12 @@
 
     <!-- JavaScript -->
     <script>
+        /* Flash Info Aktyalite */
         const newsItems = [
             "Lancement officiel de nos lignes de transport prévu pour 2027.",
+            "Lansman ofisyèl liy transpò nou yo prevwa pou ane 2027.",
             "Trajets VIP directs : Gonaïves - Port-au-Prince - Cap-Haïtien.",
-            "Service client & Réservations bientôt disponibles 24/7.",
+            "Sèvis kliyan ak rezèvasyon ap disponib 24/7 trè bientò.",
             "Suivez l'état du trafic en temps réel sur notre application mobile très bientôt !"
         ];
 
@@ -552,7 +644,26 @@
                 newsEl.innerText = newsItems[newsIndex];
                 newsEl.style.opacity = 1;
             }, 500);
-        }, 10000);
+        }, 8000);
+
+        /* Meteo Express AI Aktyalite */
+        const weatherNewsItems = [
+            "Gonaïves (75°F) : Solèy klere ak bèl tan pou vwayaje sou Nasyonal #1 la.",
+            "Cap-Haïtien (78°F) : Ti van fre nan nò a, wout yo swa e lib pou vwayajè yo.",
+            "Port-au-Prince (80°F) : Bèl tan jeneral, AI nou an konsèye w bwè anpil dlo nan rès jounen an.",
+            "Météo Haïti Update: Pas de perturbations majeures signalées sur nos itinéraires principaux."
+        ];
+
+        let weatherIndex = 0;
+        setInterval(() => {
+            weatherIndex = (weatherIndex + 1) % weatherNewsItems.length;
+            const weatherEl = document.getElementById("weatherNewsText");
+            weatherEl.style.opacity = 0;
+            setTimeout(() => {
+                weatherEl.innerText = weatherNewsItems[weatherIndex];
+                weatherEl.style.opacity = 1;
+            }, 500);
+        }, 9000);
 
         function toggleChat() {
             var modal = document.getElementById('chatModal');
